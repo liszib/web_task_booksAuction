@@ -1,0 +1,76 @@
+﻿@model MVC.Models.UserModel
+@{
+    var dateNow = DateTime.Now.ToString("yyyy-MM-dd");
+    var dateMinimum = DateTime.Now.AddYears(-100).ToString("yyyy-MM-dd");
+}
+
+<form method="post">
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>Welcome to the Online Auction!</h1>
+            <p>Пожалуйста, зарегистрируйтесь</p>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <h3>Зарегистрироваться</h3>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Имя</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Фамилия</label>
+                        <div class="col-sm-10">
+                            <input asp-for="SurName" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Дата рождения</label>
+                        <div class="col-sm-5">
+                            <input asp-for="DateOfBirth" type="date" max="@dateNow" min="@dateMinimum" />
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Email" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Номер телефона</label>
+                        <div class="col-sm-10">
+                            <input asp-for="PhoneNumber" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Пароль</label>
+                        <div class="col-sm-10">
+                            <input asp-for ="Password" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <input type="submit" class="btn btn-light" value="Регистрация" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

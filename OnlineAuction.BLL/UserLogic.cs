@@ -33,5 +33,10 @@ namespace OnlineAuction.BLL
         {
             _userDao.DeleteUser(userId);
         }
+        
+        public int HaveUser(string login, string password)
+        {
+            return _userDao.HaveUser(login, password);
+        }
     }
 }

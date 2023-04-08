@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineAuction.BLL.Interface\OnlineAuction.BLL.Interface.csproj" />
+    <ProjectReference Include="..\OnlineAuction.BLL\OnlineAuction.BLL.csproj" />
+    <ProjectReference Include="..\OnlineAuction.DAL.Interface\OnlineAuction.DAL.Interface.csproj" />
+    <ProjectReference Include="..\OnlineAuction.DAL\OnlineAuction.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

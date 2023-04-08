@@ -1,0 +1,81 @@
+﻿@model MVC.Models.LotModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+
+    List<string> _bookGenres = new List<string>{ "Детектив", "Фантастика", "Приключения", "Роман", "Научная книга", "Фольклор(эпос, легенды, сказки)",
+        "Юмор(анекдоты, союз)","Справочная книга", "Поэзия", "Детская книга", "Документальная литература", "Деловая литература",
+        "Религиозная литература", "Учебная книга", "Книга о психологии", "Хобби, досуг(отдых, туризм, домашние животные, домоводство)",
+        "Техника(авто, бытовая техника, компьютер)"};
+}
+
+<form method="post">
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>Выложите свой лот на аукцион!</h1>
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <h3>Добавить информацию о новом лоте</h3>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Название</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Name" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Стоимость</label>
+                        <div class="col-sm-5">
+
+                            <input asp-for="Price" type="number" class="form-control" min="1" max=@int.MaxValue>
+
+                        </div>
+                        <label class="col-sm-2 col-form-label">Рублей</label>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Автор</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Author" type="text" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Жанр</label>
+                        <div class="col-sm-10">
+                            <select class="custom-select" asp-for="Genre">
+                                <option selected value="null">Nothing</option>
+                                @foreach (string bookgenre in _bookGenres)
+                                {
+                                    <option value="@bookgenre">@bookgenre</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Описание</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Description" type="text" class="form-control">
+                            <label class="col-sm-10 col-form-label">(не более 100 символов)</label>
+                        </div>
+
+                    </div>
+
+                    <input type="submit" class="btn btn-light" value="Выложить лот" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

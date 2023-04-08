@@ -1,4 +1,5 @@
-﻿using OnlineAuction.DAL.Interface;
+﻿using Microsoft.Extensions.Configuration;
+using OnlineAuction.DAL.Interface;
 using OnlineAuction.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,18 @@ namespace OnlineAuction.DAL
 {
     public class UserDao : IUserDao
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["OnlineAuction"].ConnectionString;
+        private readonly string _connectionString;
+
+        public UserDao(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("OnlineAuction");
+        }
+
+        internal UserDao(string connection)
+        {
+            _connectionString = connection;
+        }
+
         public int Add(User user)
         {
             int lastId = 0;
@@ -44,7 +56,6 @@ namespace OnlineAuction.DAL
         {
             List<User> users = new List<User>();
             
-
             using (var connection = new SqlConnection(_connectionString))
             {
                 var cmd = connection.CreateCommand();
@@ -131,6 +142,32 @@ namespace OnlineAuction.DAL
 
             }
             return user;
+        }
+
+        public int HaveUser(string login, string password)
+        {
+            int userId = 0;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "HaveUser";
+                cmd.Parameters.AddWithValue(@"Login", login);
+                cmd.Parameters.AddWithValue(@"Password", password);
+                
+                var id = new SqlParameter
+                {
+                    DbType = DbType.Int32,
+                    ParameterName = "ID",
+                    Direction = ParameterDirection.Output
+                };
+
+                connection.Open();
+
+                userId = int.Parse(cmd.ExecuteScalar().ToString());
+            }
+
+            return userId;
         }
     }
 }

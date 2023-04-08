@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-
-namespace OnlineAuction.Entities
+﻿namespace OnlineAuction.Entities
 {
     public class User
     {
@@ -15,6 +11,6 @@ namespace OnlineAuction.Entities
         public DateTime DateOfBirth { get; set; }
         public List<Lot> BoughtLots { get; set; }
         public List<Lot> SellLots { get; set; }
-        
+
     }
 }

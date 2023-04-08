@@ -6,8 +6,13 @@ namespace OnlineAuction.DAL.Interface
     public interface IUserDao
     {
         int Add(User user);
+
         IEnumerable<User> GetAll();
+
         User GetUserById(int userId);
+
         void DeleteUser(int userId);
+
+        int HaveUser(string login, string password);
     }
 }

@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+<div class="container">
+    <h2>Выберите, что вы собираетесь сделать!</h2>
+    <ul class="list-group">
+        <li>
+            <input type="button" value="Личная информация" onclick="location.href='@Url.Action("PersonalInformation", "User")'" />
+            <p>
+                Здесь вы можете просмотреть свою личную информацию, а также информацию о продаваемых
+                или купленных вами лотах данного аукциона.
+            </p>
+        </li>
+        <li>
+            <input type="button" value="Продать лот" onclick="location.href='@Url.Action("SellALot", "Lot")'" />
+            <p>
+                Здесь вы можете выложить свой лот на аукцион.
+            </p>
+
+        </li>
+        <li>
+            <input type="button" value="Поиск" onclick="location.href='@Url.Action("Search", "Lot")'" />
+            <p>
+                Здесь вы можете найти интересующий вас лот по его названию или по имени продавца, а также вывести их в отсортированном
+                виде по возрастанию или убыванию стоимости.
+            </p>
+            <p>
+                На этой странице представленны только еще не купленные лоты!
+            </p>
+
+        </li>
+    </ul>
+</div>
+
