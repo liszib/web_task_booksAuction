@@ -53,5 +53,74 @@ namespace MVC.Controllers
             }
             return RedirectToAction("ErrorPage");
         }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            try
+            {
+                var lots = _lotLogic.GetAll();
+                List<LotModel> lotsList = new List<LotModel>();
+
+                foreach (var selllot in lots)
+                {
+                    lotsList.Add(new LotModel()
+                    {
+                        ID = selllot.Id,
+                        Name = selllot.Name,
+                        Price = selllot.Price,
+                        Seller = new UserModel()
+                        {
+                            Name = selllot.Seller.Name,
+                            SurName = selllot.Seller.SurName,
+                            PhoneNumber = selllot.Seller.PhoneNumber,
+                            Email = selllot.Seller.Email
+                        },
+                        Author = selllot.Author,
+                        Description = selllot.Description,
+                        Genre = selllot.Genre
+                    });
+
+                    if (selllot.Customer != null)
+                    {
+                        lotsList.Last().Customer = new UserModel()
+                        {
+                            Name = selllot.Customer.Name,
+                            SurName = selllot.Customer.SurName,
+                            PhoneNumber = selllot.Customer.PhoneNumber,
+                            Email = selllot.Customer.Email
+                        };
+                    }
+                }
+                return View(lotsList);
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage", "Home");
+            }
+        }
+
+        public IActionResult Buy(IFormCollection formCollection)
+        {
+            var value = formCollection["selectedLot"];
+
+            int userID = 0;
+
+            if (Request.Cookies.ContainsKey("logIn"))
+            {
+                userID = int.Parse(Request.Cookies["logIn"]);
+            }
+
+            if (userID != 0)
+            {
+                _lotLogic.BuyLot(userID, int.Parse(value));
+
+                return RedirectToAction("Search", "Lot");
+            }
+            else
+            {
+                return RedirectToAction("ErrorPage", "Home");
+            }
+        }
     }
 }

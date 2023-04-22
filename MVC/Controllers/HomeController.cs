@@ -25,15 +25,22 @@ namespace MVC.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
-            int id = _userLogic.HaveUser(loginModel.Login, loginModel.Password);
-
-            if (ModelState.IsValid && id != 0)
+            try
             {
-                Response.Cookies.Append("logIn", id.ToString());
+                int id = _userLogic.HaveUser(loginModel.Login, loginModel.Password);
 
-                return RedirectToAction("Index");
+                if (ModelState.IsValid && id != 0)
+                {
+                    Response.Cookies.Append("logIn", id.ToString());
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("ErrorPage");
+                }
             }
-            else
+            catch
             {
                 return RedirectToAction("ErrorPage");
             }
