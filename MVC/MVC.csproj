@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c70a9dc0-cce4-44a0-86a2-c8c13e8378f8</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
+    <PackageReference Include="RabbitMQ.Client" Version="6.5.0" />
+    <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OnlineAuction.BLL.Interface\OnlineAuction.BLL.Interface.csproj" />
+    <ProjectReference Include="..\OnlineAuction.BLL\OnlineAuction.BLL.csproj" />
+    <ProjectReference Include="..\OnlineAuction.DAL.Interface\OnlineAuction.DAL.Interface.csproj" />
+    <ProjectReference Include="..\OnlineAuction.DAL\OnlineAuction.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

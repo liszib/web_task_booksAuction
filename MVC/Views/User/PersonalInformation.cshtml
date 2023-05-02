@@ -1,0 +1,115 @@
+﻿@model UserModel
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+
+<div class="jumbotron text-lg-start">
+    <div class="container-fluid">
+        <h1>Здравствуй, @Model.Name!</h1>
+        <p>Эту личную информацию о вас видят все пользователи Онлайн Аукциона!</p>
+
+        <div class="form-group row">
+            <p>Имя: <output class="col-sm-10 col-form-label">@Model.Name</output></p>
+        </div>
+
+        <div class="form-group row">
+            <p>Фамилия: <output class="col-sm-10 col-form-label">@Model.SurName</output></p>
+        </div>
+
+        <div class="form-group row">
+            <p>Номер телефона: <output class="col-sm-10 col-form-label">@Model.PhoneNumber</output></p>
+        </div>
+
+        <div class="form-group row">
+            <p>Дата рождения: <output class="col-sm-10 col-form-label">@Model.DateOfBirth.ToShortDateString()</output></p>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div>
+        <h3> Купленные лоты</h3>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <td scope="col">Название</td>
+                    <td scope="col">Цена</td>
+                    <td scope="col">Автор</td>
+                    <td scope="col">Жанр</td>
+                    <td scope="col">Продавец</td>
+                    <td scope="col">Описание</td>
+                </tr>
+            </thead>
+            <tbody>
+
+                @if (@Model.BoughtLots != null)
+                {
+                    if (@Model.BoughtLots.Count != 0)
+                    {
+                        foreach (var lot in @Model.BoughtLots)
+                        {
+                            <tr>
+                                <td>@lot.Name</td>
+                                <td>@lot.Price</td>
+                                <td>@lot.Author</td>
+                                <td>@lot.Genre</td>
+                                <td>@lot.Seller.Name @lot.Seller.SurName @lot.Seller.PhoneNumber</td>
+                                <td>@lot.Description</td>
+                            </tr>
+                        }
+                    }
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div>
+        <h3> Продаваемые лоты</h3>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <td scope="col">Название</td>
+                    <td scope="col">Цена</td>
+                    <td scope="col">Автор</td>
+                    <td scope="col">Жанр</td>
+                    <td scope="col">Покупатель</td>
+                    <td scope="col">Описание</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (@Model.SellLots != null)
+                {
+                    if (@Model.SellLots.Count != 0)
+                    {
+                        foreach (var lot in @Model.SellLots)
+                        {
+                            <tr>
+                                <td>@lot.Name</td>
+                                <td>@lot.Price</td>
+                                <td>@lot.Author</td>
+                                <td>@lot.Genre</td>
+                                <td>
+                                    @if (@lot.Customer != null)
+                                    {
+                                        <p>@lot.Customer.Name @lot.Customer.SurName @lot.Customer.PhoneNumber</p>
+                                    }
+
+                                    else
+                                    {
+                                        <p>Нет покупателя</p>
+                                    }
+                                </td>
+                                <td>@lot.Description</td>
+                            </tr>
+                        }
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

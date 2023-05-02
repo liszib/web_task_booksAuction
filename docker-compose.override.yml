@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  mvc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ConnectionStrings__OnlineAuction=Server=db;Database=OnlineAuction;User Id=sa;Password=Pas!s0word;Integrated Security=false;
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

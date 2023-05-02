@@ -1,7 +1,7 @@
-﻿using OnlineAuction.DAL.Interface;
+﻿using Microsoft.Extensions.Configuration;
+using OnlineAuction.DAL.Interface;
 using OnlineAuction.Entities;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -9,7 +9,12 @@ namespace OnlineAuction.DAL
 {
     public class LotDao : ILotDao
     {
-        private string _connectionString = ConfigurationManager.ConnectionStrings["OnlineAuction"].ConnectionString;
+        private readonly string _connectionString;
+
+        public LotDao(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("OnlineAuction");
+        }
 
         public int Add(Lot lot)
         {
@@ -93,7 +98,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
                     Lot newLot = new Lot();
 
                     ID = (int)reader["ID"];
@@ -150,7 +155,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
                     Lot newLot = new Lot();
 
                     ID = (int)reader["ID"];
@@ -181,7 +186,7 @@ namespace OnlineAuction.DAL
         public Lot GetLotById(int lotId)
         {
             Lot newLot = new Lot();
-            UserDao userDao = new UserDao();
+            UserDao userDao = new UserDao(_connectionString);
 
             int ID = 0;
             string Name = "";
@@ -257,7 +262,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
                     Lot newLot = new Lot();
 
                     ID = (int)reader["ID"];
@@ -313,7 +318,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
 
                     Lot newLot = new Lot();
 
@@ -372,7 +377,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
                     Lot newLot = new Lot();
 
                     ID = (int)reader["ID"];
@@ -430,7 +435,7 @@ namespace OnlineAuction.DAL
 
                 while (reader.Read())
                 {
-                    UserDao userDao = new UserDao();
+                    UserDao userDao = new UserDao(_connectionString);
                     Lot newLot = new Lot();
 
                     ID = (int)reader["ID"];

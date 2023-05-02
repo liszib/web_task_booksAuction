@@ -1,0 +1,48 @@
+﻿@model MVC.Models.LoginModel
+
+<form method="post">
+
+    <div class="jumbotron text-center">
+        <div class="container">
+            <h1>Добро пожаловать на книжный Онлайн Аукцион!</h1>
+            <p>Пожалуйста, зарегистрируйтесь или войдите</p>
+            <div class="row">
+
+                <div class="col-sm-6">
+
+                    @Html.ActionLink("Зарегистрироваться", "Register", "Home")
+
+                </div>
+
+                <div class="col-sm-6">
+
+                    <h3>Войти</h3>
+
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Логин</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Login" name="login" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Пароль</label>
+                        <div class="col-sm-10">
+                            <input asp-for="Password" name="password" type="text" class="form-control">
+                        </div>
+                    </div>
+
+
+                    <br />
+
+                    <button type="submit" name="action" value="Auth">Войти</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+

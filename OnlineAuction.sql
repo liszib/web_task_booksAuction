@@ -145,3 +145,11 @@ AS
 SELECT ID, Name, Price, Author, Genre, Description, Seller, Customer from Lots
 WHERE Genre = @Genre 
 GO
+
+CREATE PROCEDURE HaveUser
+@Login nvarchar (100),
+@Password nvarchar (100)
+AS
+SELECT ID from Users
+WHERE Name = @Login AND Password = @Password
+GO

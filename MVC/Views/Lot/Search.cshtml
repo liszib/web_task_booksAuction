@@ -1,0 +1,23 @@
+﻿
+@model List<LotModel>
+
+@{
+    Layout = "~/Views/Shared/MainLayout.cshtml";
+}
+
+@using (Html.BeginForm("Buy", "Lot",FormMethod.Post))
+{
+        <select class="custom-select" name="selectedLot">
+            <option selected value="null">Выберите интересующую книгу</option>
+            @foreach (var lot in @Model)
+            {
+                <option value="@lot.ID">
+                    Название: @lot.Name Цена: @lot.Price Автор: @lot.Author Жанр: @lot.Genre Продавец: @lot.Seller.Name @lot.Seller.SurName @lot.Seller.PhoneNumber
+                    @lot.Seller.DateOfBirth.ToShortDateString() Описание: @lot.Description
+                </option>
+            }
+        </select>
+
+    <input type="submit" value="Купить" />
+
+}

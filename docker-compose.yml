@@ -1,0 +1,45 @@
+version: '3.4'
+
+networks:
+  mssql:
+    driver: bridge
+
+
+
+services:
+  mvc:
+    image: ${DOCKER_REGISTRY-}mvc
+    build:
+      context: .
+      dockerfile: MVC/Dockerfile
+    depends_on:
+      - db
+      - rabbitmq
+      - auctionbot
+    networks:
+      - mssql
+  auctionbot:
+    image: ${DOCKER_REGISTRY-}auctionbot
+    build:
+      context: .
+      dockerfile: AuctionBot/Dockerfile
+    depends_on:
+      - db
+      - rabbitmq
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: db
+    environment:
+      - SA_PASSWORD=Pas!s0word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"  
+    networks:
+      - mssql
+  rabbitmq:
+    image: 'rabbitmq:3'
+    ports:
+      - '5673:5672'
+      - '15673:15672'
+    networks:
+      - mssql
